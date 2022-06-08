@@ -1,6 +1,7 @@
 const { response } = require('express')
 const { request } = require('express')
 const express = require('express')
+const morgan = require('morgan')
 const req = require('express/lib/request')
 const app= express()
 
@@ -28,6 +29,8 @@ let persons= [
 ]
 
 app.use(express.json())
+
+app.use(morgan('tiny'))
 //add person
 app.post('/api/persons', (request,response) => {
   const body = request.body
@@ -82,13 +85,15 @@ app.get('/api/persons/:id', (request,response) =>{
         response.status(404).end()
     }
 })
-
+//remove person
 app.delete('/api/persons/:id',(request,response) =>{
   const id = Number(request.params.id)
   persons = persons.filter(person => person.id !== id)
 
   response.status(204).end()
 })
+
+
 
 const PORT = 3001
 app.listen(PORT, () => {
