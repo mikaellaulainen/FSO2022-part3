@@ -31,6 +31,7 @@ let persons= [
 app.use(express.json())
 
 app.use(morgan('tiny'))
+
 //add person
 app.post('/api/persons', (request,response) => {
   const body = request.body
