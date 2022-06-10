@@ -29,6 +29,8 @@ let persons= [
 app.use(express.json())
 app.use(cors())
 app.use(morgan('tiny'))
+app.use(express.static('build'))
+
 
 //add person
 app.post('/api/persons', (request,response) => {
