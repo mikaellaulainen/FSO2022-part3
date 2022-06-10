@@ -1,8 +1,6 @@
-const { response } = require('express')
-const { request } = require('express')
 const express = require('express')
 const morgan = require('morgan')
-const req = require('express/lib/request')
+const cors=require('cors')
 const app= express()
 
 let persons= [
@@ -29,7 +27,7 @@ let persons= [
 ]
 
 app.use(express.json())
-
+app.use(cors())
 app.use(morgan('tiny'))
 
 //add person
