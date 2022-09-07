@@ -11,8 +11,8 @@ const Person=require('./models/person')
 
 //all persons
 app.get('/api/persons', (request, response) => {
-  Person.find({}).then(persons=> {
-      response.json(persons)
+  Person.find({}).then(persons => {
+    response.json(persons)
   })
 })
 
@@ -37,7 +37,7 @@ app.post('/api/persons', (request,response,next) => {
 
   person.save().then(savedPerson => {
     response.json(savedPerson)
-    })
+  })
     .catch(error => { next(error)})
 })
 
@@ -58,8 +58,8 @@ app.get('/info', (req,res) => {
   })
 })
 
-// get person by id 
-app.get('/api/persons/:id', (request,response,next) =>{
+// get person by id
+app.get('/api/persons/:id', (request,response,next) => {
   Person.findById(request.params.id)
     .then(person => {
       if (person) {
@@ -73,12 +73,12 @@ app.get('/api/persons/:id', (request,response,next) =>{
     })
 })
 //remove person
-app.delete('/api/persons/:id',(request,response,next) =>{
+app.delete('/api/persons/:id',(request,response,next) => {
   Person.findByIdAndRemove(request.params.id)
-  .then(result => {
-    response.status(204).end()
-  })
-  .catch(error => next(error))
+    .then(response => {
+      response.status(204).end()
+    })
+    .catch(error => next(error))
 })
 
 const unknownEndpoint = (request, response) => {
@@ -106,5 +106,5 @@ app.use(errorHandler)
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
+  console.log(`Server running on port ${PORT}`)
 })
